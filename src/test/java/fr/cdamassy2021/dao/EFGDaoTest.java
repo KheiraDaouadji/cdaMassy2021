@@ -20,12 +20,13 @@ public class EFGDaoTest {
 
     public EFGDaoTest() {
     }
-
+    
+    
     protected static final String TESTINSERT_EFG
-            = "SELECT * FROM efg WHERE "
-            + "id_createur = 1 AND "
-            + "intitule = 'Enoncé' AND "
-            + "id_canal = 1";
+        = "SELECT * FROM efg WHERE "
+        + "id_createur = 1 AND "
+        + "intitule = 'Enoncé' AND "
+        + "id_canal = 1";
 
     /**
      * Réinitialisation de la base, pour maintenir la cohérence des tests malgré
@@ -77,5 +78,20 @@ public class EFGDaoTest {
         EFG result = instance.findById(2);
         EFG expected = new EFG(2, 1, 1, "TP cadrage");
         assertEquals(expected, result);
+    }
+
+    /**
+     * Test de la méthode findAllByCanal on vérifie que le nombre d'EFG
+     * retourné est celui attendu
+     *
+     * @throws SQLException
+     */
+    @Test
+    public void testFindAllByCanal() throws SQLException {
+        EFGDao instance = new EFGDao();
+        ArrayList<EFG> efg = instance.findAllByCanal(2);
+        int expected = 1;
+
+        assertEquals(expected, efg.size());
     }
 }
